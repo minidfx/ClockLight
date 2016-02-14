@@ -1,9 +1,19 @@
 {
   "cmd": "bash",
   "name": "Build",
-  "args": ["remote.sh", "pebble", "build"],
+  "args": ["remote.sh", "build"],
   "sh": true,
   "errorMatch": [
     "\n(?<file>[\\/0-9a-zA-Z\\._]+):(?<line>\\d+):(?<col>\\d+)"
-  ]
+  ],
+  "targets": {
+      "Deploy": {
+        "cmd": "bash",
+        "args": [ "remote.sh", "install", "--phone", "192.168.124.142", "--logs" ]
+      },
+      "Clean": {
+        "cmd": "bash",
+        "args": [ "remote.sh", "clean" ]
+      }
+    }
 }
