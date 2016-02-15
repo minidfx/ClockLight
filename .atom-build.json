@@ -9,11 +9,11 @@
   "targets": {
       "Deploy": {
         "cmd": "bash",
-        "args": [ "remote.sh", "install", "--phone", "192.168.124.142", "--logs" ]
+        "args": [ "deploy.sh" ]
       },
       "Clean": {
         "cmd": "bash",
-        "args": [ "remote.sh", "clean" ]
+        "args": [ "clean.sh" ]
       }
     }
 }
