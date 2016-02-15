@@ -1,12 +1,16 @@
 {
   "cmd": "bash",
-  "name": "Build",
-  "args": ["remote.sh", "build"],
+  "name": "Build and deploy",
+  "args": ["buildAndDeploy.sh"],
   "sh": true,
   "errorMatch": [
     "\n(?<file>[\\/0-9a-zA-Z\\._]+):(?<line>\\d+):(?<col>\\d+)"
   ],
   "targets": {
+      "Build": {
+        "cmd": "bash",
+        "args": ["remote.sh", "build"]
+      },
       "Deploy": {
         "cmd": "bash",
         "args": [ "deploy.sh" ]
