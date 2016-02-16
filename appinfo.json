@@ -1,7 +1,7 @@
 {
   "uuid": "ddfe6426-7dc9-402f-bed2-edfb6bede323",
-  "shortName": "Clock with next event",
-  "longName": "clock_with_next_event",
+  "shortName": "ClockPlus",
+  "longName": "ClockPlus",
   "companyName": "Couloir42",
   "versionLabel": "0.1",
   "sdkVersion": "3",
