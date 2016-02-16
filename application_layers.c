@@ -3,7 +3,7 @@
 * @Date:   2016-02-16T19:19:55+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-02-16T19:20:09+01:00
+* @Last modified time: 2016-02-16T19:29:21+01:00
 */
 
 #include <pebble.h>
@@ -15,14 +15,14 @@ static Layer *path_layer;
 
 static const GPathInfo LINE_PATH_INFO = {
   .num_points = 2,
-  .points = (GPoint []) {{10, 101}, {130, 101}}
+  .points = (GPoint []) {{0, 111}, {123, 111}}
 };
 
 static void draw_line_callback(Layer *layer, GContext *context) {
   line_path_ptr = gpath_create(&LINE_PATH_INFO);
 
   // Fill the path:
-  graphics_context_set_fill_color(context, GColorWhite);
+  graphics_context_set_fill_color(context, GColorBlack);
   gpath_draw_filled(context, line_path_ptr);
 
   // Stroke the path:
@@ -32,7 +32,7 @@ static void draw_line_callback(Layer *layer, GContext *context) {
 
 static void display_clock(Layer *window_layer, GRect bounds) {
   // Create the TextLayer with specific bounds
-  time_layer_ptr = text_layer_create(GRect(0, PBL_IF_ROUND_ELSE(60, 95), bounds.size.w, 42));
+  time_layer_ptr = text_layer_create(GRect(0, PBL_IF_ROUND_ELSE(70, 105), bounds.size.w, 42));
 
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(time_layer_ptr, GColorClear);
@@ -46,7 +46,7 @@ static void display_clock(Layer *window_layer, GRect bounds) {
 
 static void display_date(Layer *window_layer, GRect bounds) {
   // Create the TextLayer with specific bounds
-  date_layer_ptr = text_layer_create(GRect(18, PBL_IF_ROUND_ELSE(60, 70), bounds.size.w, 30));
+  date_layer_ptr = text_layer_create(GRect(18, PBL_IF_ROUND_ELSE(70, 80), bounds.size.w, 30));
 
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(date_layer_ptr, GColorClear);
