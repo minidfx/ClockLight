@@ -3,11 +3,12 @@
 * @Date:   2016-02-16T19:20:15+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-02-16T19:25:24+01:00
+* @Last modified time: 2016-02-17T21:12:43+01:00
 */
 
 #include <pebble.h>
 #include "application_layers.c"
+#include "calendar.c"
 
 static Window *window;
 
@@ -33,6 +34,7 @@ static void window_load(Window *window) {
 
   display_clock(window_layer, bounds);
   display_date(window_layer, bounds);
+  display_next_pin(window_layer, bounds);
 
   path_layer = layer_create(bounds);
   layer_set_update_proc(path_layer, draw_line_callback);
@@ -49,10 +51,7 @@ static void window_load(Window *window) {
 }
 
 static void window_unload(Window *window) {
-  text_layer_destroy(time_layer_ptr);
-  text_layer_destroy(date_layer_ptr);
-
-  gpath_destroy(line_path_ptr);
+  destroy_application_layers();
 }
 
 static void init(void) {
