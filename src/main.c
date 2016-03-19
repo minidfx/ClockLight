@@ -3,7 +3,7 @@
 * @Date:   2016-02-16T19:20:15+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-03-19T14:15:34+01:00
+* @Last modified time: 2016-03-19T14:48:53+01:00
 */
 
 #include <pebble.h>
@@ -19,7 +19,7 @@ static void update_time(struct tm *tick_time)
 
   strftime(s_time_buffer, sizeof(s_time_buffer), clock_is_24h_style() ? "%H:%M" : "%I:%M", tick_time);
   strftime(s_date_buffer, sizeof(s_date_buffer), "%B %d", tick_time);
-  strftime(s_week_day_buffer, sizeof(s_week_day_buffer), "%a", tick_time);
+  strftime(s_week_day_buffer, sizeof(s_week_day_buffer), "%A", tick_time);
 
   text_layer_set_text(time_layer_ptr, s_time_buffer);
   text_layer_set_text(date_layer_ptr, s_date_buffer);
