@@ -35,7 +35,15 @@ static void draw_line_callback(Layer *layer, GContext *context)
   gpath_draw_outline(context, line_path_ptr);
 }
 
-static void display_clock(Layer *window_layer, GRect bounds) {
+static void draw_line(Layer *window_layer, GRect bounds)
+{
+  path_layer = layer_create(bounds);
+  layer_set_update_proc(path_layer, draw_line_callback);
+  layer_add_child(window_layer, path_layer);
+}
+
+static void display_clock(Layer *window_layer, GRect bounds)
+{
   time_layer_ptr = text_layer_create(GRect(0, PBL_IF_ROUND_ELSE(70, 105), bounds.size.w, 42));
 
   // Improve the layout to be more like a watchface

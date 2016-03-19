@@ -53,14 +53,11 @@ static void window_load(Window *window)
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
 
+  draw_line(window_layer, bounds);
   display_clock(window_layer, bounds);
   display_date(window_layer, bounds);
   display_week_day(window_layer, bounds);
   display_battery(window_layer, bounds);
-
-  path_layer = layer_create(bounds);
-  layer_set_update_proc(path_layer, draw_line_callback);
-  layer_add_child(window_layer, path_layer);
 
   // Register services
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
