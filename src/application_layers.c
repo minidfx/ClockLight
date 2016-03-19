@@ -12,7 +12,6 @@ static TextLayer *time_layer_ptr;
 static TextLayer *date_layer_ptr;
 static GPath *line_path_ptr;
 static Layer *path_layer;
-static TextLayer *next_pin_ptr;
 static TextLayer *battery_layer_ptr;
 static TextLayer *week_day_layer_ptr;
 
@@ -51,7 +50,6 @@ static void display_clock(Layer *window_layer, GRect bounds) {
 
 static void display_date(Layer *window_layer, GRect bounds)
 {
-  unsigned int left = 20;
   date_layer_ptr = text_layer_create(GRect(textPaddingLeft, PBL_IF_ROUND_ELSE(70, 80), bounds.size.w - textPaddingLeft, 30));
 
   // Improve the layout to be more like a watchface
@@ -94,6 +92,5 @@ static void destroy_application_layers()
 {
   text_layer_destroy(time_layer_ptr);
   text_layer_destroy(date_layer_ptr);
-  text_layer_destroy(next_pin_ptr);
   gpath_destroy(line_path_ptr);
 }
