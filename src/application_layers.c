@@ -3,7 +3,7 @@
 * @Date:   2016-02-16T19:19:55+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-03-19T13:10:17+01:00
+* @Last modified time: 2016-03-19T14:18:41+01:00
 */
 
 #include <pebble.h>
@@ -14,6 +14,9 @@ static GPath *line_path_ptr;
 static Layer *path_layer;
 static TextLayer *next_pin_ptr;
 static TextLayer *battery_layer_ptr;
+static TextLayer *week_day_layer_ptr;
+
+static unsigned int textPaddingLeft = 20;
 
 static const GPathInfo LINE_PATH_INFO = {
   .num_points = 2,
@@ -49,7 +52,7 @@ static void display_clock(Layer *window_layer, GRect bounds) {
 static void display_date(Layer *window_layer, GRect bounds)
 {
   unsigned int left = 20;
-  date_layer_ptr = text_layer_create(GRect(left, PBL_IF_ROUND_ELSE(70, 80), bounds.size.w - left, 30));
+  date_layer_ptr = text_layer_create(GRect(textPaddingLeft, PBL_IF_ROUND_ELSE(70, 80), bounds.size.w - textPaddingLeft, 30));
 
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(date_layer_ptr, GColorClear);
@@ -59,6 +62,20 @@ static void display_date(Layer *window_layer, GRect bounds)
 
   // Add it as a child layer to the Window's root layer
   layer_add_child(window_layer, text_layer_get_layer(date_layer_ptr));
+}
+
+static void display_week_day(Layer *window_layer, GRect bounds)
+{
+  week_day_layer_ptr = text_layer_create(GRect(textPaddingLeft, PBL_IF_ROUND_ELSE(50, 60), bounds.size.w - textPaddingLeft, 30));
+
+  // Improve the layout to be more like a watchface
+  text_layer_set_background_color(week_day_layer_ptr, GColorClear);
+  text_layer_set_text_color(week_day_layer_ptr, GColorBlack);
+  text_layer_set_font(week_day_layer_ptr, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
+  text_layer_set_text_alignment(week_day_layer_ptr, GTextAlignmentLeft);
+
+  // Add it as a child layer to the Window's root layer
+  layer_add_child(window_layer, text_layer_get_layer(week_day_layer_ptr));
 }
 
 static void display_battery(Layer *window, GRect bounds)

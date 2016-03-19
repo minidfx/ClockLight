@@ -15,12 +15,15 @@ static void update_time(struct tm *tick_time)
 {
   static char s_time_buffer[8];
   static char s_date_buffer[12];
+  static char s_week_day_buffer[15];
 
   strftime(s_time_buffer, sizeof(s_time_buffer), clock_is_24h_style() ? "%H:%M" : "%I:%M", tick_time);
   strftime(s_date_buffer, sizeof(s_date_buffer), "%B %d", tick_time);
+  strftime(s_week_day_buffer, sizeof(s_week_day_buffer), "%a", tick_time);
 
   text_layer_set_text(time_layer_ptr, s_time_buffer);
   text_layer_set_text(date_layer_ptr, s_date_buffer);
+  text_layer_set_text(week_day_layer_ptr, s_week_day_buffer);
 }
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed)
@@ -52,6 +55,7 @@ static void window_load(Window *window)
 
   display_clock(window_layer, bounds);
   display_date(window_layer, bounds);
+  display_week_day(window_layer, bounds);
   display_battery(window_layer, bounds);
 
   path_layer = layer_create(bounds);
@@ -73,6 +77,7 @@ static void window_load(Window *window)
 static void window_unload(Window *window)
 {
   destroy_application_layers();
+  tick_timer_service_unsubscribe();
   battery_state_service_unsubscribe();
 }
 
