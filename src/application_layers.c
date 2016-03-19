@@ -13,6 +13,7 @@ static TextLayer *date_layer_ptr;
 static GPath *line_path_ptr;
 static Layer *path_layer;
 static TextLayer *next_pin_ptr;
+static TextLayer *battery_layer_ptr;
 
 static const GPathInfo LINE_PATH_INFO = {
   .num_points = 2,
@@ -58,6 +59,18 @@ static void display_date(Layer *window_layer, GRect bounds)
 
   // Add it as a child layer to the Window's root layer
   layer_add_child(window_layer, text_layer_get_layer(date_layer_ptr));
+}
+
+static void display_battery(Layer *window, GRect bounds)
+{
+  battery_layer_ptr = text_layer_create(GRect(0, 0, bounds.size.w - 5, 18));
+  text_layer_set_text_color(battery_layer_ptr, GColorBlack);
+  text_layer_set_background_color(battery_layer_ptr, GColorClear);
+  text_layer_set_font(battery_layer_ptr, fonts_get_system_font(FONT_KEY_GOTHIC_18));
+  text_layer_set_text_alignment(battery_layer_ptr, GTextAlignmentRight);
+  text_layer_set_text(battery_layer_ptr, "100% charged");
+
+  layer_add_child(window, text_layer_get_layer(battery_layer_ptr));
 }
 
 static void destroy_application_layers()

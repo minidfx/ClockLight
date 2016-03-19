@@ -28,6 +28,22 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed)
   update_time(tick_time);
 }
 
+static void handle_battery(BatteryChargeState charge_state)
+{
+  static char battery_text[] = "...";
+
+  if (charge_state.is_charging)
+  {
+    snprintf(battery_text, sizeof(battery_text), "...");
+  }
+  else
+  {
+    snprintf(battery_text, sizeof(battery_text), "%d%%", charge_state.charge_percent);
+  }
+
+  text_layer_set_text(battery_layer_ptr, battery_text);
+}
+
 static void window_load(Window *window)
 {
   // Get information about the Window
@@ -36,6 +52,7 @@ static void window_load(Window *window)
 
   display_clock(window_layer, bounds);
   display_date(window_layer, bounds);
+  display_battery(window_layer, bounds);
 
   path_layer = layer_create(bounds);
   layer_set_update_proc(path_layer, draw_line_callback);
@@ -43,17 +60,20 @@ static void window_load(Window *window)
 
   // Register with TickTimerService
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
+  battery_state_service_subscribe(handle_battery);
 
   // Get a tm structure
   time_t temp = time(NULL);
   struct tm *tick_time = localtime(&temp);
 
   update_time(tick_time);
+  handle_battery(battery_state_service_peek());
 }
 
 static void window_unload(Window *window)
 {
   destroy_application_layers();
+  battery_state_service_unsubscribe();
 }
 
 static void init(void)
