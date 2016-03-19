@@ -4,7 +4,6 @@
   "args": ["buildAndDeploy.sh"],
   "sh": true,
   "errorMatch": [
-    "\n(?<file>[\\/0-9a-zA-Z\\._]+):(?<line>\\d+):(?<col>\\d+)"
   ],
   "targets": {
       "Build": {
