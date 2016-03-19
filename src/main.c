@@ -3,7 +3,7 @@
 * @Date:   2016-02-16T19:20:15+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-03-19T14:48:53+01:00
+* @Last modified time: 2016-03-19T15:02:08+01:00
 */
 
 #include <pebble.h>
@@ -73,12 +73,7 @@ static void window_load(Window *window)
 
 static void window_unload(Window *window)
 {
-  text_layer_destroy(time_layer_ptr);
-  text_layer_destroy(next_pin_ptr);
-  text_layer_destroy(battery_layer_ptr);
-  text_layer_destroy(week_day_layer_ptr);
-  layer_destroy(path_layer);
-  gpath_destroy(line_path_ptr);
+  destroy_application_layers();
 
   tick_timer_service_unsubscribe();
   battery_state_service_unsubscribe();

@@ -3,7 +3,7 @@
 * @Date:   2016-02-16T19:19:55+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-03-19T14:18:41+01:00
+* @Last modified time: 2016-03-19T14:58:48+01:00
 */
 
 #include <pebble.h>
@@ -99,6 +99,8 @@ static void display_battery(Layer *window, GRect bounds)
 static void destroy_application_layers()
 {
   text_layer_destroy(time_layer_ptr);
-  text_layer_destroy(date_layer_ptr);
+  text_layer_destroy(battery_layer_ptr);
+  text_layer_destroy(week_day_layer_ptr);
+  layer_destroy(path_layer);
   gpath_destroy(line_path_ptr);
 }
