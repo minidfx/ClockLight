@@ -19,20 +19,6 @@ static const GPathInfo LINE_PATH_INFO = {
   .points = (GPoint []) {{0, 111}, {127, 111}}
 };
 
-static void display_next_pin(Layer *window_layer, GRect bounds)
-{
-  next_pin_ptr = text_layer_create(GRect(0, PBL_IF_ROUND_ELSE(70, 105), bounds.size.w, 42));
-
-  // Improve the layout to be more like a watchface
-  text_layer_set_background_color(next_pin_ptr, GColorClear);
-  text_layer_set_text_color(next_pin_ptr, GColorBlack);
-  text_layer_set_font(next_pin_ptr, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
-  text_layer_set_text_alignment(next_pin_ptr, GTextAlignmentCenter);
-
-  // Add it as a child layer to the Window's root layer
-  layer_add_child(window_layer, text_layer_get_layer(next_pin_ptr));
-}
-
 static void draw_line_callback(Layer *layer, GContext *context)
 {
   line_path_ptr = gpath_create(&LINE_PATH_INFO);

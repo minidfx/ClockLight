@@ -8,7 +8,6 @@
 
 #include <pebble.h>
 #include "application_layers.c"
-#include "calendar.c"
 
 static Window *window;
 
@@ -37,7 +36,6 @@ static void window_load(Window *window)
 
   display_clock(window_layer, bounds);
   display_date(window_layer, bounds);
-  display_next_pin(window_layer, bounds);
 
   path_layer = layer_create(bounds);
   layer_set_update_proc(path_layer, draw_line_callback);
