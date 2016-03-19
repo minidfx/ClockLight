@@ -1,11 +1,11 @@
 {
   "uuid": "ddfe6426-7dc9-402f-bed2-edfb6bede323",
-  "shortName": "ClockPlus",
-  "longName": "ClockPlus",
+  "shortName": "ClockLight",
+  "longName": "ClockLight",
   "companyName": "Couloir42",
-  "versionLabel": "0.1",
+  "versionLabel": "0.2",
   "sdkVersion": "3",
-  "targetPlatforms": ["aplite", "basalt", "chalk"],
+  "targetPlatforms": ["aplite"],
   "watchapp": {
     "watchface": true
   },
