@@ -3,7 +3,7 @@
 * @Date:   2016-02-16T19:20:15+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-03-19T13:10:45+01:00
+* @Last modified time: 2016-03-19T14:15:34+01:00
 */
 
 #include <pebble.h>
@@ -62,7 +62,7 @@ static void window_load(Window *window)
   layer_set_update_proc(path_layer, draw_line_callback);
   layer_add_child(window_layer, path_layer);
 
-  // Register with TickTimerService
+  // Register services
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
   battery_state_service_subscribe(handle_battery);
 
@@ -76,7 +76,13 @@ static void window_load(Window *window)
 
 static void window_unload(Window *window)
 {
-  destroy_application_layers();
+  text_layer_destroy(time_layer_ptr);
+  text_layer_destroy(next_pin_ptr);
+  text_layer_destroy(battery_layer_ptr);
+  text_layer_destroy(week_day_layer_ptr);
+  layer_destroy(path_layer);
+  gpath_destroy(line_path_ptr);
+
   tick_timer_service_unsubscribe();
   battery_state_service_unsubscribe();
 }
