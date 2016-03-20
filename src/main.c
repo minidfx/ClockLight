@@ -3,7 +3,7 @@
 * @Date:   2016-02-16T19:20:15+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-03-19T15:02:08+01:00
+* @Last modified time: 2016-03-20T10:47:13+01:00
 */
 
 #include <pebble.h>
@@ -33,31 +33,18 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed)
 
 static void handle_battery(BatteryChargeState charge_state)
 {
-  static char battery_text[] = "...";
-
-  if (charge_state.is_charging)
-  {
-    snprintf(battery_text, sizeof(battery_text), "...");
-  }
-  else
-  {
-    snprintf(battery_text, sizeof(battery_text), "%d%%", charge_state.charge_percent);
-  }
-
-  text_layer_set_text(battery_layer_ptr, battery_text);
+  update_battery_line(charge_state.charge_percent);
 }
 
 static void window_load(Window *window)
 {
-  // Get information about the Window
-  Layer *window_layer = window_get_root_layer(window);
-  GRect bounds = layer_get_bounds(window_layer);
+  init_window_layer(window);
 
-  draw_line(window_layer, bounds);
-  display_clock(window_layer, bounds);
-  display_date(window_layer, bounds);
-  display_week_day(window_layer, bounds);
-  display_battery(window_layer, bounds);
+  draw_line();
+  display_clock();
+  display_date();
+  display_week_day();
+  draw_battery_line();
 
   // Register services
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
