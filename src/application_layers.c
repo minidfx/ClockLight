@@ -3,7 +3,7 @@
 * @Date:   2016-02-16T19:19:55+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-03-20T10:47:33+01:00
+* @Last modified time: 2016-03-20T10:53:29+01:00
 */
 
 #include <pebble.h>
@@ -20,7 +20,7 @@ static Layer *window_layer;
 static GRect window_bounds;
 
 static uint8_t charge_percent = 0;
-static uint8_t textPaddingLeft = 20;
+static uint8_t textPaddingLeft = 15;
 
 static void init_window_layer(Window *window)
 {
@@ -32,7 +32,7 @@ static void init_window_layer(Window *window)
 static void draw_line_callback(Layer *layer, GContext *context)
 {
   GPoint start = GPoint(0, 111);
-  GPoint end = GPoint(127, 111);
+  GPoint end = GPoint(122, 111);
 
   graphics_draw_line(context, start, end);
 }
@@ -71,13 +71,13 @@ static void update_battery_line(uint8_t percent)
 
 static void display_clock()
 {
-  time_layer_ptr = text_layer_create(GRect(0, PBL_IF_ROUND_ELSE(70, 105), window_bounds.size.w, 42));
+  time_layer_ptr = text_layer_create(GRect(textPaddingLeft, PBL_IF_ROUND_ELSE(70, 105), window_bounds.size.w - textPaddingLeft, 42));
 
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(time_layer_ptr, GColorClear);
   text_layer_set_text_color(time_layer_ptr, GColorBlack);
   text_layer_set_font(time_layer_ptr, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
-  text_layer_set_text_alignment(time_layer_ptr, GTextAlignmentCenter);
+  text_layer_set_text_alignment(time_layer_ptr, GTextAlignmentLeft);
 
   // Add it as a child layer to the Window's root layer
   layer_add_child(window_layer, text_layer_get_layer(time_layer_ptr));
