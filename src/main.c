@@ -3,7 +3,7 @@
 * @Date:   2016-02-16T19:20:15+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-03-22T21:15:03+01:00
+* @Last modified time: 2016-03-22T22:03:19+01:00
 */
 
 #include <pebble.h>
@@ -16,10 +16,10 @@ static void window_load(Window *window)
     init_window_layer(window);
 
     draw_line();
-    display_clock();
-    display_date();
-    display_week_day();
     draw_battery_line();
+    draw_time();
+    draw_date();
+    draw_week_day();
 
     // Register services
     tick_timer_service_subscribe(MINUTE_UNIT, handle_minute);

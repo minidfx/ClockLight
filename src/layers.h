@@ -3,7 +3,7 @@
 * @Date:   2016-03-22T20:22:31+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-03-22T21:11:39+01:00
+* @Last modified time: 2016-03-22T22:02:26+01:00
 */
 
 #include <pebble.h>
@@ -14,9 +14,9 @@ void draw_line();
 void draw_battery_line_callback(Layer *layer, GContext *context);
 void draw_battery_line();
 void update_battery_line(uint8_t percent);
-void display_clock();
-void display_date();
-void display_week_day();
+void draw_time();
+void draw_date();
+void draw_week_day();
 void destroy_application_layers();
 void update_time(struct tm *tick_time);
 
