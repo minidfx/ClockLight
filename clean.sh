@@ -2,7 +2,7 @@
 # @Date:   2016-02-15T20:36:23+01:00
 # @Email:  benjamin.burgy@gmail.com
 # @Last modified by:   minidfx
-# @Last modified time: 2016-03-22T20:15:01+01:00
+# @Last modified time: 2016-03-22T20:17:57+01:00
 
 #!/bin/bash
 
@@ -16,4 +16,14 @@ if [ -z $PEBBLE_SDK_PATH ]; then
   exit 2
 fi
 
-ssh minidfx@couloir42.local "cd $PROJECT_PATH;$PEBBLE_SDK_PATH/pebble clean"
+if [ -z $USERNAME ]; then
+  echo "USERNAME environment variable is empty or not defined."
+  exit 3
+fi
+
+if [ -z $SERVER_HOST ]; then
+  echo "SERVER_HOST environment variable is empty or not defined."
+  exit 4
+fi
+
+ssh $USERNAME@$SERVER_HOST "cd $PROJECT_PATH;$PEBBLE_SDK_PATH/pebble clean"
