@@ -3,7 +3,7 @@
 * @Date:   2016-02-16T19:19:55+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-03-22T21:11:30+01:00
+* @Last modified time: 2016-03-22T21:42:42+01:00
 */
 
 #include <pebble.h>
@@ -22,6 +22,7 @@ static GRect window_bounds;
 
 static uint8_t charge_percent = 0;
 static uint8_t textPaddingLeft = 15;
+static uint8_t battery_line_width = 4;
 
 void handle_minute(struct tm *tick_time, TimeUnits units_changed)
 {
@@ -57,15 +58,15 @@ void init_window_layer(Window *window)
 
 void draw_line_callback(Layer *layer, GContext *context)
 {
-    GPoint start = GPoint(0, 111);
-    GPoint end = GPoint(122, 111);
+    GPoint start = GPoint(0, 0);
+    GPoint end = GPoint(122, 0);
 
     graphics_draw_line(context, start, end);
 }
 
 void draw_line()
 {
-    path_layer = layer_create(window_bounds);
+    path_layer = layer_create(GRect(0, 110, 122, 1));
     layer_set_update_proc(path_layer, draw_line_callback);
     layer_add_child(window_layer, path_layer);
 }
@@ -73,7 +74,7 @@ void draw_line()
 void draw_battery_line_callback(Layer *layer, GContext *context)
 {
     uint8_t lineHeight = charge_percent * window_bounds.size.h / 100;
-    GRect rect_bounds = GRect(window_bounds.size.w - 4, lineHeight, window_bounds.size.w, window_bounds.size.h);
+    GRect rect_bounds = GRect(0, window_bounds.size.h - lineHeight, battery_line_width, window_bounds.size.h);
 
     // Draw a rectangle
     graphics_draw_rect(context, rect_bounds);
@@ -84,14 +85,14 @@ void draw_battery_line_callback(Layer *layer, GContext *context)
 
 void draw_battery_line()
 {
-    battery_path_layer = layer_create(window_bounds);
+    battery_path_layer = layer_create(GRect(window_bounds.size.w - battery_line_width, 0, battery_line_width, window_bounds.size.h));
     layer_set_update_proc(battery_path_layer, draw_battery_line_callback);
     layer_add_child(window_layer, battery_path_layer);
 }
 
 void update_battery_line(uint8_t percent)
 {
-    charge_percent = 100 - percent;
+    charge_percent = percent;
     layer_mark_dirty(battery_path_layer);
 }
 
