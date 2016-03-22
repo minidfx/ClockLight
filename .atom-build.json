@@ -6,38 +6,18 @@
   "errorMatch": [
     "\\.\\.\\/(?<file>[\\/0-9a-zA-Z\\._]+):(?<line>\\d+):(?<col>\\d+): error:"
   ],
-  "env": {
-    "PROJECT_PATH": "Developer/Pebble/ClockLight",
-    "PEBBLE_SDK_PATH": "/home/minidfx/pebble-sdk/bin",
-    "PHONE_IP": "192.168.124.52"
-  },
   "targets": {
       "Build": {
         "cmd": "bash",
-        "args": ["remote.sh", "build"],
-        "env": {
-          "PROJECT_PATH": "Developer/Pebble/ClockLight",
-          "PEBBLE_SDK_PATH": "/home/minidfx/pebble-sdk/bin",
-          "PHONE_IP": "192.168.124.52"
-        }
+        "args": ["remote.sh", "build"]
       },
       "Deploy": {
         "cmd": "bash",
-        "args": [ "deploy.sh" ],
-        "env": {
-          "PROJECT_PATH": "Developer/Pebble/ClockLight",
-          "PEBBLE_SDK_PATH": "/home/minidfx/pebble-sdk/bin",
-          "PHONE_IP": "192.168.124.52"
-        }
+        "args": [ "deploy.sh" ]
       },
       "Clean": {
         "cmd": "bash",
-        "args": [ "clean.sh" ],
-        "env": {
-          "PROJECT_PATH": "Developer/Pebble/ClockLight",
-          "PEBBLE_SDK_PATH": "/home/minidfx/pebble-sdk/bin",
-          "PHONE_IP": "192.168.124.52"
-        }
+        "args": [ "clean.sh" ]
       }
     }
 }
