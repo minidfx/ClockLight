@@ -3,7 +3,7 @@
 * @Date:   2016-02-16T19:19:55+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-03-22T22:03:27+01:00
+* @Last modified time: 2016-03-25T09:51:27+01:00
 */
 
 #include <pebble.h>
@@ -195,7 +195,6 @@ void destroy_application_layers()
 
     layer_destroy(ptr_line_layer);
     layer_destroy(ptr_battery_layer);
-    layer_destroy(ptr_window_layer);
 
     APP_LOG(APP_LOG_LEVEL_DEBUG, "Resource released.");
 }
