@@ -30,6 +30,8 @@ void handle_minute(struct tm *tick_time, TimeUnits units_changed)
 
 void update_time(struct tm *tick_time)
 {
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Updating date and time ...");
+
     static char s_time_buffer[8];
     static char s_date_buffer[12];
     static char s_week_day_buffer[15];
@@ -41,6 +43,8 @@ void update_time(struct tm *tick_time)
     text_layer_set_text(ptr_time_layer, s_time_buffer);
     text_layer_set_text(ptr_date_layer, s_date_buffer);
     text_layer_set_text(ptr_week_day_layer, s_week_day_buffer);
+
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Done.");
 }
 
 void handle_battery(BatteryChargeState charge_state)
@@ -50,28 +54,44 @@ void handle_battery(BatteryChargeState charge_state)
 
 void init_window_layer(Window *window)
 {
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Initializing the window ...");
+
     // Get information about the Window
     ptr_window_layer = window_get_root_layer(window);
     window_bounds = layer_get_bounds(ptr_window_layer);
+
+    APP_LOG(APP_LOG_LEVEL_DEBUG_VERBOSE, "Window layer pointer initialized: %p", ptr_window_layer);
+
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Done.");
 }
 
 void draw_line_callback(Layer *layer, GContext *context)
 {
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Drawing the line ...");
+
     GPoint start = GPoint(0, 0);
     GPoint end = GPoint(122, 0);
 
     graphics_draw_line(context, start, end);
+
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Done.");
 }
 
 void draw_line()
 {
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Preparing the line layer ...");
+
     ptr_line_layer = layer_create(GRect(0, 110, 122, 1));
     layer_set_update_proc(ptr_line_layer, draw_line_callback);
     layer_add_child(ptr_window_layer, ptr_line_layer);
+
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Done.");
 }
 
 void draw_battery_line_callback(Layer *layer, GContext *context)
 {
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Drawing the battery line ...");
+
     uint8_t lineHeight = charge_percent * window_bounds.size.h / 100;
     GRect rect_bounds = GRect(0, window_bounds.size.h - lineHeight, battery_line_width, window_bounds.size.h);
 
@@ -80,24 +100,38 @@ void draw_battery_line_callback(Layer *layer, GContext *context)
 
     // Fill rectangle
     graphics_fill_rect(context, rect_bounds, 0, GCornersAll);
+
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Done.");
 }
 
 void draw_battery_line()
 {
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Preparing the battery line layer ...");
+
     ptr_battery_layer = layer_create(GRect(window_bounds.size.w - battery_line_width, 0, battery_line_width, window_bounds.size.h));
     layer_set_update_proc(ptr_battery_layer, draw_battery_line_callback);
     layer_add_child(ptr_window_layer, ptr_battery_layer);
+
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Done.");
 }
 
 void update_battery_line(uint8_t percent)
 {
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Updating the battery line ...");
+
     charge_percent = percent;
     layer_mark_dirty(ptr_battery_layer);
+
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Done.");
 }
 
 void draw_time()
 {
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Drawing the time ...");
+
     ptr_time_layer = text_layer_create(GRect(textPaddingLeft, PBL_IF_ROUND_ELSE(70, 105), window_bounds.size.w - textPaddingLeft, 42));
+
+    APP_LOG(APP_LOG_LEVEL_DEBUG_VERBOSE, "Time layer pointer initialized: %p", ptr_time_layer);
 
     // Improve the layout to be more like a watchface
     text_layer_set_background_color(ptr_time_layer, GColorClear);
@@ -107,11 +141,17 @@ void draw_time()
 
     // Add it as a child layer to the Window's root layer
     layer_add_child(ptr_window_layer, text_layer_get_layer(ptr_time_layer));
+
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Done.");
 }
 
 void draw_date()
 {
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Drawing the date ...");
+
     ptr_date_layer = text_layer_create(GRect(textPaddingLeft, PBL_IF_ROUND_ELSE(70, 80), window_bounds.size.w - textPaddingLeft, 30));
+
+    APP_LOG(APP_LOG_LEVEL_DEBUG_VERBOSE, "Date layer pointer initialized: %p", ptr_date_layer);
 
     // Improve the layout to be more like a watchface
     text_layer_set_background_color(ptr_date_layer, GColorClear);
@@ -121,11 +161,17 @@ void draw_date()
 
     // Add it as a child layer to the Window's root layer
     layer_add_child(ptr_window_layer, text_layer_get_layer(ptr_date_layer));
+
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Done.");
 }
 
 void draw_week_day()
 {
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Drawing the week of day ...");
+
     ptr_week_day_layer = text_layer_create(GRect(textPaddingLeft, PBL_IF_ROUND_ELSE(50, 60), window_bounds.size.w - textPaddingLeft, 30));
+
+    APP_LOG(APP_LOG_LEVEL_DEBUG_VERBOSE, "Week layer pointer initialized: %p", ptr_week_day_layer);
 
     // Improve the layout to be more like a watchface
     text_layer_set_background_color(ptr_week_day_layer, GColorClear);
@@ -135,10 +181,14 @@ void draw_week_day()
 
     // Add it as a child layer to the Window's root layer
     layer_add_child(ptr_window_layer, text_layer_get_layer(ptr_week_day_layer));
+
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Done.");
 }
 
 void destroy_application_layers()
 {
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Releasing resources ...");
+
     text_layer_destroy(ptr_time_layer);
     text_layer_destroy(ptr_date_layer);
     text_layer_destroy(ptr_week_day_layer);
@@ -146,4 +196,6 @@ void destroy_application_layers()
     layer_destroy(ptr_line_layer);
     layer_destroy(ptr_battery_layer);
     layer_destroy(ptr_window_layer);
+
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Resource released.");
 }
