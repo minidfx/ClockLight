@@ -35,10 +35,10 @@ static void window_load(Window *window)
 
 static void window_unload(Window *window)
 {
-    destroy_application_layers();
-
     tick_timer_service_unsubscribe();
     battery_state_service_unsubscribe();
+
+    destroy_application_layers();
 }
 
 static void init(void)
