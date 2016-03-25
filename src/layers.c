@@ -3,7 +3,7 @@
 * @Date:   2016-02-16T19:19:55+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-03-25T09:51:27+01:00
+* @Last modified time: 2016-03-25T10:00:38+01:00
 */
 
 #include <pebble.h>
@@ -16,12 +16,43 @@ static TextLayer *ptr_week_day_layer;
 static Layer *ptr_line_layer;
 static Layer *ptr_battery_layer;
 static Layer *ptr_window_layer;
+static Layer *ptr_bluetooth_layer;
+
+static GDrawCommandImage *ptr_bluetooth_icon;
 
 static GRect window_bounds;
 
 static uint8_t charge_percent = 0;
 static uint8_t textPaddingLeft = 15;
 static uint8_t battery_line_width = 4;
+
+static uint32_t NO_BLUETOOTH = 1;
+static uint32_t NO_BATTERY = 2;
+
+static status_t pebbleAppStatus = S_FALSE;
+
+void load_resources()
+{
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Loading resources ...");
+
+    // Create the object from resource file
+    ptr_bluetooth_icon = gdraw_command_image_create_with_resource(NO_BLUETOOTH);
+
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Done.");
+}
+
+void handle_app_connection_handler(bool connected)
+{
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Pebble app %sconnected", connected ? "" : "dis");
+    pebbleAppStatus = (status_t)connected;
+
+    layer_set_hidden(ptr_bluetooth_layer, connected);
+}
+
+void handle_kit_connection_handler(bool connected)
+{
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "PebbleKit %sconnected", connected ? "" : "dis");
+}
 
 void handle_minute(struct tm *tick_time, TimeUnits units_changed)
 {
@@ -50,6 +81,35 @@ void update_datetime(struct tm *tick_time)
 void handle_battery(BatteryChargeState charge_state)
 {
     update_battery_line(charge_state.charge_percent);
+}
+
+void draw_bluetooth_callback(Layer *layer, GContext *context)
+{
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Drawing bluetooth icon layer ...");
+
+    /// Set the origin offset from the context for drawing the image
+    GPoint origin = GPoint(0, 0);
+
+    // Draw the GDrawCommandImage to the GContext
+    gdraw_command_image_draw(context, ptr_bluetooth_icon, origin);
+
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Done.");
+}
+
+void draw_bluetooth()
+{
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Preparing bluetooth icon layer ...");
+
+    // Create the canvas Layer
+    ptr_bluetooth_layer = layer_create(GRect(textPaddingLeft, 45, 16, 20));
+
+    // Set the LayerUpdateProc
+    layer_set_update_proc(ptr_bluetooth_layer, draw_bluetooth_callback);
+
+    // Add to parent Window
+    layer_add_child(ptr_window_layer, ptr_bluetooth_layer);
+
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Done.");
 }
 
 void init_window_layer(Window *window)
@@ -195,6 +255,9 @@ void destroy_application_layers()
 
     layer_destroy(ptr_line_layer);
     layer_destroy(ptr_battery_layer);
+    layer_destroy(ptr_bluetooth_layer);
+
+    gdraw_command_image_destroy(ptr_bluetooth_icon);
 
     APP_LOG(APP_LOG_LEVEL_DEBUG, "Resource released.");
 }

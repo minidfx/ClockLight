@@ -3,7 +3,7 @@
   "shortName": "ClockLight",
   "longName": "ClockLight",
   "companyName": "Couloir42",
-  "versionLabel": "0.2",
+  "versionLabel": "0.3",
   "sdkVersion": "3",
   "targetPlatforms": ["aplite"],
   "watchapp": {
@@ -13,6 +13,17 @@
     "dummy": 0
   },
   "resources": {
-    "media": []
+    "media": [
+      {
+        "type": "raw",
+        "name": "NO_BLUETOOTH",
+        "file": "noBluetooth.pdc"
+      },
+      {
+        "type": "raw",
+        "name": "EMPTY_BATTERY",
+        "file": "emptyBattery.pdc"
+      }
+    ]
   }
 }
