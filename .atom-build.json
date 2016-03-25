@@ -6,18 +6,57 @@
   "errorMatch": [
     "\\.\\.\\/(?<file>[\\/0-9a-zA-Z\\._]+):(?<line>\\d+):(?<col>\\d+): error:"
   ],
+  "env": {
+    "PROJECT_PATH": "Developer/Pebble/ClockLight",
+    "PEBBLE_SDK_PATH": "/home/minidfx/pebble-sdk/bin",
+    "PHONE_IP": "192.168.124.52",
+    "USERNAME": "minidfx",
+    "SERVER_HOST": "couloir42.local"
+  },
   "targets": {
       "Build": {
         "cmd": "bash",
-        "args": ["remote.sh", "build"]
+        "args": ["remote.sh", "build"],
+        "env": {
+          "PROJECT_PATH": "Developer/Pebble/ClockLight",
+          "PEBBLE_SDK_PATH": "/home/minidfx/pebble-sdk/bin",
+          "PHONE_IP": "192.168.124.52",
+          "USERNAME": "minidfx",
+          "SERVER_HOST": "couloir42.local"
+        }
       },
       "Deploy": {
         "cmd": "bash",
-        "args": [ "deploy.sh" ]
+        "args": [ "deploy.sh" ],
+        "env": {
+          "PROJECT_PATH": "Developer/Pebble/ClockLight",
+          "PEBBLE_SDK_PATH": "/home/minidfx/pebble-sdk/bin",
+          "PHONE_IP": "192.168.124.52",
+          "USERNAME": "minidfx",
+          "SERVER_HOST": "couloir42.local"
+        }
       },
       "Clean": {
         "cmd": "bash",
-        "args": [ "clean.sh" ]
+        "args": [ "clean.sh" ],
+        "env": {
+          "PROJECT_PATH": "Developer/Pebble/ClockLight",
+          "PEBBLE_SDK_PATH": "/home/minidfx/pebble-sdk/bin",
+          "PHONE_IP": "192.168.124.52",
+          "USERNAME": "minidfx",
+          "SERVER_HOST": "couloir42.local"
+        }
+      },
+      "Push only": {
+        "cmd": "bash",
+        "args": [ "push.sh" ],
+        "env": {
+          "PROJECT_PATH": "Developer/Pebble/ClockLight",
+          "PEBBLE_SDK_PATH": "/home/minidfx/pebble-sdk/bin",
+          "PHONE_IP": "192.168.124.52",
+          "USERNAME": "minidfx",
+          "SERVER_HOST": "couloir42.local"
+        }
       }
     }
 }

@@ -26,6 +26,10 @@ if [ -z $SERVER_HOST ]; then
   exit 4
 fi
 
-rsync -zrh --delete --exclude ".git/" --exclude "includes/" --progress . couloir42.local:$PROJECT_PATH
+bash ./push.sh
+
+if [ $? -gt 0]; then
+    exit $?
+fi
 
 ssh $USERNAME@$SERVER_HOST "cd $PROJECT_PATH;$PEBBLE_SDK_PATH/pebble $@"
