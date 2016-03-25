@@ -25,10 +25,10 @@ static uint8_t battery_line_width = 4;
 
 void handle_minute(struct tm *tick_time, TimeUnits units_changed)
 {
-    update_time(tick_time);
+    update_datetime(tick_time);
 }
 
-void update_time(struct tm *tick_time)
+void update_datetime(struct tm *tick_time)
 {
     APP_LOG(APP_LOG_LEVEL_DEBUG, "Updating date and time ...");
 

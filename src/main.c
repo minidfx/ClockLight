@@ -3,7 +3,7 @@
 * @Date:   2016-02-16T19:20:15+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-03-22T22:03:19+01:00
+* @Last modified time: 2016-03-25T09:36:20+01:00
 */
 
 #include <pebble.h>
@@ -29,7 +29,7 @@ static void window_load(Window *window)
     time_t temp = time(NULL);
     struct tm *tick_time = localtime(&temp);
 
-    update_time(tick_time);
+    update_datetime(tick_time);
     handle_battery(battery_state_service_peek());
 }
 

@@ -3,7 +3,7 @@
 * @Date:   2016-03-22T20:22:31+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-03-22T22:02:26+01:00
+* @Last modified time: 2016-03-25T09:36:12+01:00
 */
 
 #include <pebble.h>
@@ -18,7 +18,7 @@ void draw_time();
 void draw_date();
 void draw_week_day();
 void destroy_application_layers();
-void update_time(struct tm *tick_time);
+void update_datetime(struct tm *tick_time);
 
 void handle_minute(struct tm *tick_time, TimeUnits units_changed);
 void handle_battery(BatteryChargeState charge_state);
