@@ -15,6 +15,10 @@ static void window_load(Window *window)
 {
     init_window_layer(window);
 
+    // Set the watch language
+    const char *language = i18n_get_system_locale();
+    setlocale(LC_ALL, language);
+
     draw_line();
     draw_battery_line();
     draw_time();
