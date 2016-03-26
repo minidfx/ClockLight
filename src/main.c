@@ -31,8 +31,7 @@ static void window_load(Window *window)
     battery_state_service_subscribe(handle_battery);
     connection_service_subscribe((ConnectionHandlers)
     {
-        .pebble_app_connection_handler = handle_app_connection_handler,
-        .pebblekit_connection_handler = handle_kit_connection_handler
+        .pebble_app_connection_handler = handle_app_connection_handler
     });
 
     // Get a tm structure
@@ -42,7 +41,6 @@ static void window_load(Window *window)
     update_datetime(tick_time);
     handle_battery(battery_state_service_peek());
     handle_app_connection_handler(connection_service_peek_pebble_app_connection());
-    handle_kit_connection_handler(connection_service_peek_pebblekit_connection());
 }
 
 static void window_unload(Window *window)

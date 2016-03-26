@@ -24,6 +24,5 @@ void update_datetime(struct tm *tick_time);
 void load_resources();
 
 void handle_app_connection_handler(bool connected);
-void handle_kit_connection_handler(bool connected);
 void handle_minute(struct tm *tick_time, TimeUnits units_changed);
 void handle_battery(BatteryChargeState charge_state);

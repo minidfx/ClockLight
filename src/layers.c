@@ -49,11 +49,6 @@ void handle_app_connection_handler(bool connected)
     layer_set_hidden(ptr_bluetooth_layer, connected);
 }
 
-void handle_kit_connection_handler(bool connected)
-{
-    APP_LOG(APP_LOG_LEVEL_DEBUG, "PebbleKit %sconnected", connected ? "" : "dis");
-}
-
 void handle_minute(struct tm *tick_time, TimeUnits units_changed)
 {
     update_datetime(tick_time);
