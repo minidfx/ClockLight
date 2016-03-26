@@ -196,7 +196,7 @@ void draw_time()
     // Improve the layout to be more like a watchface
     text_layer_set_background_color(ptr_time_layer, GColorClear);
     text_layer_set_text_color(ptr_time_layer, GColorBlack);
-    text_layer_set_font(ptr_time_layer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
+    text_layer_set_font(ptr_time_layer, fonts_get_system_font(FONT_KEY_LECO_38_BOLD_NUMBERS));
     text_layer_set_text_alignment(ptr_time_layer, GTextAlignmentLeft);
 
     // Add it as a child layer to the Window's root layer
