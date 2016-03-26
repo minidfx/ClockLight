@@ -101,7 +101,7 @@ void draw_bluetooth()
     APP_LOG(APP_LOG_LEVEL_DEBUG, "Preparing bluetooth icon layer ...");
 
     // Create the canvas Layer
-    ptr_bluetooth_layer = layer_create(GRect(textPaddingLeft, 45, 16, 20));
+    ptr_bluetooth_layer = layer_create(GRect(textPaddingLeft, 40, 25, 21));
 
     // Set the LayerUpdateProc
     layer_set_update_proc(ptr_bluetooth_layer, draw_bluetooth_callback);
