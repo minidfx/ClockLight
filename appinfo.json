@@ -1,16 +1,13 @@
 {
   "uuid": "ddfe6426-7dc9-402f-bed2-edfb6bede323",
   "shortName": "ClockLight",
-  "longName": "ClockLight",
+  "longName": "Clock Light",
   "companyName": "Couloir42",
-  "versionLabel": "0.3",
+  "versionLabel": "1.0",
   "sdkVersion": "3",
   "targetPlatforms": ["aplite"],
   "watchapp": {
     "watchface": true
-  },
-  "appKeys": {
-    "dummy": 0
   },
   "resources": {
     "media": [
