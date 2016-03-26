@@ -28,7 +28,7 @@ fi
 
 bash ./push.sh
 
-if [ $? -gt 0]; then
+if [ $? -gt 0 ]; then
     exit $?
 fi
 
