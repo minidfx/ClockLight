@@ -1,4 +1,4 @@
-/**
+﻿/**
 * @Author: Burgy Benjamin <minidfx>
 * @Date:   2016-02-16T19:19:55+01:00
 * @Email:  benjamin.burgy@gmail.com
@@ -76,7 +76,7 @@ void update_datetime(struct tm *tick_time)
     text_layer_set_text(ptr_date_layer, s_date_buffer);
     text_layer_set_text(ptr_week_day_layer, s_week_day_buffer);
 
-APP_LOG(APP_LOG_LEVEL_DEBUG, "Done.");
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Done.");
 }
 
 void handle_battery(BatteryChargeState charge_state)

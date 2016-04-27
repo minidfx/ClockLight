@@ -1,4 +1,4 @@
-/**
+﻿/**
 * @Author: Burgy Benjamin <minidfx>
 * @Date:   2016-02-16T19:20:15+01:00
 * @Email:  benjamin.burgy@gmail.com
@@ -51,7 +51,7 @@ static void window_unload(Window *window)
     destroy_application_layers();
 }
 
-static void init(void)
+static void init()
 {
     window = window_create();
     window_set_window_handlers(window, (WindowHandlers)
@@ -66,12 +66,12 @@ static void init(void)
     window_stack_push(window, animated);
 }
 
-static void deinit(void)
+static void deinit()
 {
     window_destroy(window);
 }
 
-int main(void)
+int main()
 {
     init();
 
