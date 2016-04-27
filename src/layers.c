@@ -47,6 +47,11 @@ void handle_app_connection_handler(bool connected)
 
     pebbleAppStatus = (status_t)connected;
 
+    if(!pebbleAppStatus)
+    {
+        vibes_double_pulse();
+    }
+
     layer_set_hidden(ptr_bluetooth_layer, connected);
 }
 
