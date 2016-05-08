@@ -27,7 +27,6 @@ static uint8_t textPaddingLeft = 15;
 static uint8_t battery_line_width = 4;
 
 static uint32_t NO_BLUETOOTH = 1;
-static uint32_t NO_BATTERY = 2;
 
 static status_t pebbleAppStatus = S_FALSE;
 static status_t isInitialized = S_FALSE;
