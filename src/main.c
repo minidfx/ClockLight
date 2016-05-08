@@ -3,7 +3,7 @@
 * @Date:   2016-02-16T19:20:15+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-03-25T10:01:17+01:00
+* @Last modified time: 2016-05-08T21:09:51+02:00
 */
 
 #include <pebble.h>
@@ -41,6 +41,8 @@ static void window_load(Window *window)
     update_datetime(tick_time);
     handle_battery(battery_state_service_peek());
     handle_app_connection_handler(connection_service_peek_pebble_app_connection());
+
+    setToReady(S_TRUE);
 }
 
 static void window_unload(Window *window)

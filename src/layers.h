@@ -1,10 +1,10 @@
 /**
- * @Author: Burgy Benjamin <minidfx>
- * @Date:   2016-03-22T20:22:31+01:00
- * @Email:  benjamin.burgy@gmail.com
- * @Last modified by:   minidfx
- * @Last modified time: 2016-03-25T10:00:43+01:00
- */
+* @Author: Burgy Benjamin <minidfx>
+* @Date:   2016-03-22T20:22:31+01:00
+* @Email:  benjamin.burgy@gmail.com
+* @Last modified by:   minidfx
+* @Last modified time: 2016-05-08T21:09:47+02:00
+*/
 
 #include <pebble.h>
 
@@ -21,6 +21,7 @@ void draw_week_day();
 void destroy_application_layers();
 void update_datetime(struct tm *tick_time);
 
+void setToReady(status_t state);
 void load_resources();
 
 void handle_app_connection_handler(bool connected);

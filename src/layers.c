@@ -3,7 +3,7 @@
 * @Date:   2016-02-16T19:19:55+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-03-25T10:00:38+01:00
+* @Last modified time: 2016-05-08T21:09:18+02:00
 */
 
 #include <pebble.h>
@@ -30,6 +30,13 @@ static uint32_t NO_BLUETOOTH = 1;
 static uint32_t NO_BATTERY = 2;
 
 static status_t pebbleAppStatus = S_FALSE;
+static status_t isInitialized = S_FALSE;
+
+void setToReady(status_t state)
+{
+  isInitialized = state;
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "The watchface is completely loaded.");
+}
 
 void load_resources()
 {
@@ -47,7 +54,7 @@ void handle_app_connection_handler(bool connected)
 
     pebbleAppStatus = (status_t)connected;
 
-    if(!pebbleAppStatus)
+    if(!pebbleAppStatus && isInitialized)
     {
         vibes_double_pulse();
     }
