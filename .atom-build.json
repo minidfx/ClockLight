@@ -1,7 +1,7 @@
 {
   "cmd": "docker",
   "name": "Build (thru docker)",
-  "args": ["run", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblerunner", "build"],
+  "args": ["run", "--rm", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblerunner", "build"],
   "sh": true,
   "errorMatch": [
     "\\.\\.\\/(?<file>[\\/0-9a-zA-Z\\._]+):(?<line>\\d+):(?<col>\\d+): error:"
@@ -16,11 +16,11 @@
   "targets": {
     "Deploy (thru docker)": {
       "cmd": "docker",
-      "args": ["run", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblerunner", "install", "--phone", "192.168.1.112"]
+      "args": ["run", "--rm", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblerunner", "install", "--phone", "192.168.1.112"]
     },
     "Clean (thru docker)": {
       "cmd": "docker",
-      "args": ["run", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblerunner", "clean"]
+      "args": ["run", "--rm", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblerunner", "clean"]
     },
     "Build (thru server)": {
         "cmd": "bash",
