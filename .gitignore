@@ -33,3 +33,6 @@
 
 # Atom build configuration
 .atom-build.json
+
+# Pebble 
+/build

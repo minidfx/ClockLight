@@ -1,7 +1,7 @@
 {
-  "cmd": "bash",
-  "name": "Build and deploy",
-  "args": ["buildAndDeploy.sh"],
+  "cmd": "docker",
+  "name": "Build (thru docker)",
+  "args": ["run", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblerunner", "build"],
   "sh": true,
   "errorMatch": [
     "\\.\\.\\/(?<file>[\\/0-9a-zA-Z\\._]+):(?<line>\\d+):(?<col>\\d+): error:"
@@ -14,7 +14,15 @@
     "SERVER_HOST": "<ssh_host>"
   },
   "targets": {
-      "Build": {
+    "Deploy (thru docker)": {
+      "cmd": "docker",
+      "args": ["run", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblerunner", "install", "--phone", "192.168.1.112"]
+    },
+    "Clean (thru docker)": {
+      "cmd": "docker",
+      "args": ["run", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblerunner", "clean"]
+    },
+    "Build (thru server)": {
         "cmd": "bash",
         "args": ["remote.sh", "build"],
         "env": {
@@ -25,7 +33,7 @@
           "SERVER_HOST": "<ssh_host>"
         }
       },
-      "Deploy": {
+      "Deploy (thru server)": {
         "cmd": "bash",
         "args": [ "deploy.sh" ],
         "env": {
@@ -36,7 +44,7 @@
           "SERVER_HOST": "<ssh_host>"
         }
       },
-      "Clean": {
+      "Clean (thru server)": {
         "cmd": "bash",
         "args": [ "clean.sh" ],
         "env": {
@@ -47,7 +55,7 @@
           "SERVER_HOST": "<ssh_host>"
         }
       },
-      "Push only": {
+      "Push only (thru server)": {
         "cmd": "bash",
         "args": [ "push.sh" ],
         "env": {
@@ -58,5 +66,5 @@
           "SERVER_HOST": "<ssh_host>"
         }
       }
-    }
+  }
 }
