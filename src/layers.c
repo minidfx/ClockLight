@@ -3,7 +3,7 @@
 * @Date:   2016-02-16T19:19:55+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-05-08T21:09:18+02:00
+* @Last modified time: 2016-10-01T14:12:44+02:00
 */
 
 #include <pebble.h>
@@ -71,7 +71,7 @@ void update_datetime(struct tm *tick_time)
     APP_LOG(APP_LOG_LEVEL_DEBUG, "Updating date and time ...");
 
     static char s_time_buffer[8];
-    static char s_date_buffer[12];
+    static char s_date_buffer[15];
     static char s_week_day_buffer[15];
 
     strftime(s_time_buffer, sizeof(s_time_buffer), clock_is_24h_style() ? "%H:%M" : "%I:%M", tick_time);
