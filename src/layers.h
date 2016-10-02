@@ -3,7 +3,7 @@
 * @Date:   2016-03-22T20:22:31+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-05-08T21:09:47+02:00
+* @Last modified time: 2016-10-02T11:17:46+02:00
 */
 
 #include <pebble.h>
@@ -14,6 +14,9 @@ void draw_line();
 void draw_battery_line_callback(Layer *layer, GContext *context);
 void draw_battery_line();
 void draw_bluetooth();
+void draw_empty_battery_callback(Layer *layer, GContext *context);
+void draw_empty_battery_icon();
+void hide_empty_battery_icon();
 void update_battery_line(uint8_t percent);
 void draw_time();
 void draw_date();

@@ -3,7 +3,7 @@
 * @Date:   2016-02-16T19:19:55+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-10-01T14:12:44+02:00
+* @Last modified time: 2016-10-02T14:41:50+02:00
 */
 
 #include <pebble.h>
@@ -17,8 +17,10 @@ static Layer *ptr_line_layer;
 static Layer *ptr_battery_layer;
 static Layer *ptr_window_layer;
 static Layer *ptr_bluetooth_layer;
+static Layer *ptr_empty_battery_layer;
 
 static GDrawCommandImage *ptr_bluetooth_icon;
+static GDrawCommandImage *ptr_empty_battery_icon;
 
 static GRect window_bounds;
 
@@ -27,6 +29,7 @@ static uint8_t textPaddingLeft = 15;
 static uint8_t battery_line_width = 4;
 
 static uint32_t NO_BLUETOOTH = 1;
+static uint32_t EMPTY_BATTERY = 2;
 
 static status_t pebbleAppStatus = S_FALSE;
 static status_t isInitialized = S_FALSE;
@@ -43,6 +46,7 @@ void load_resources()
 
     // Create the object from resource file
     ptr_bluetooth_icon = gdraw_command_image_create_with_resource(NO_BLUETOOTH);
+    ptr_empty_battery_icon = gdraw_command_image_create_with_resource(EMPTY_BATTERY);
 
     APP_LOG(APP_LOG_LEVEL_DEBUG, "Done.");
 }
@@ -87,14 +91,24 @@ void update_datetime(struct tm *tick_time)
 
 void handle_battery(BatteryChargeState charge_state)
 {
-    update_battery_line(charge_state.charge_percent);
+    unsigned int percent = charge_state.charge_percent;
+    update_battery_line(percent);
+
+    if(percent == 0)
+    {
+      draw_empty_battery_icon();
+    }
+    else
+    {
+      hide_empty_battery_icon();
+    }
 }
 
 void draw_bluetooth_callback(Layer *layer, GContext *context)
 {
     APP_LOG(APP_LOG_LEVEL_DEBUG, "Drawing bluetooth icon layer ...");
 
-    /// Set the origin offset from the context for drawing the image
+    // Set the origin offset from the context for drawing the image
     GPoint origin = GPoint(0, 0);
 
     // Draw the GDrawCommandImage to the GContext
@@ -117,6 +131,45 @@ void draw_bluetooth()
     layer_add_child(ptr_window_layer, ptr_bluetooth_layer);
 
     APP_LOG(APP_LOG_LEVEL_DEBUG, "Done.");
+}
+
+void draw_empty_battery_callback(Layer *layer, GContext *context)
+{
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "Drawing empty battery icon layer ...");
+
+  // Set the origin offset from the context for drawing the image
+  GPoint origin = GPoint(0, 0);
+
+  // Draw the GDrawCommandImage to the GContext
+  gdraw_command_image_draw(context, ptr_empty_battery_icon, origin);
+
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "Done.");
+}
+
+void draw_empty_battery_icon()
+{
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "Preparing empty battery icon layer ...");
+
+  int width = 18;
+  int height = 15;
+  int x = window_bounds.size.w - width;
+  int y = window_bounds.size.h - height;
+
+  // Create the canvas Layer
+  ptr_empty_battery_layer = layer_create(GRect(x, y, width, height));
+
+  // Set the LayerUpdateProc
+  layer_set_update_proc(ptr_empty_battery_layer, draw_empty_battery_callback);
+
+  // Add to parent Window
+  layer_add_child(ptr_window_layer, ptr_empty_battery_layer);
+
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "Done.");
+}
+
+void hide_empty_battery_icon()
+{
+  layer_set_hidden(ptr_bluetooth_layer, true);
 }
 
 void init_window_layer(Window *window)
