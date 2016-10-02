@@ -16,11 +16,19 @@
   "targets": {
     "Deploy (thru docker)": {
       "cmd": "docker",
-      "args": ["run", "--rm", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblerunner", "install", "--phone", "192.168.1.112"]
+      "args": ["run", "--rm", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblerunner", "install", "--phone", "<your phone ip>"]
     },
     "Clean (thru docker)": {
       "cmd": "docker",
       "args": ["run", "--rm", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblerunner", "clean"]
+    },
+    "Logs (thru docker)": {
+      "cmd": "docker",
+      "args": ["run", "--rm", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblerunner", "logs", "--phone", "<your phone ip>"]
+    },
+    "Screenshot (thru docker)": {
+      "cmd": "docker",
+      "args": ["run", "--rm", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblerunner", "screenshot", "--phone", "<your phone ip>"]
     },
     "Build (thru server)": {
         "cmd": "bash",
