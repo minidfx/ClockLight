@@ -1,7 +1,7 @@
 {
   "cmd": "docker",
   "name": "Build (thru docker)",
-  "args": ["run", "--rm", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblerunner", "build"],
+  "args": ["run", "--rm", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblesdkrunner", "build"],
   "sh": true,
   "errorMatch": [
     "\\.\\.\\/(?<file>[\\/0-9a-zA-Z\\._]+):(?<line>\\d+):(?<col>\\d+): error:\\s+(?<message>.+)"
@@ -16,19 +16,19 @@
   "targets": {
     "Deploy (thru docker)": {
       "cmd": "docker",
-      "args": ["run", "--rm", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblerunner", "install", "--phone", "<your phone ip>"]
+      "args": ["run", "--rm", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblesdkrunner", "install", "--phone", "<your phone ip>"]
     },
     "Clean (thru docker)": {
       "cmd": "docker",
-      "args": ["run", "--rm", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblerunner", "clean"]
+      "args": ["run", "--rm", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblesdkrunner", "clean"]
     },
     "Logs (thru docker)": {
       "cmd": "docker",
-      "args": ["run", "--rm", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblerunner", "logs", "--phone", "<your phone ip>"]
+      "args": ["run", "--rm", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblesdkrunner", "logs", "--phone", "<your phone ip>"]
     },
     "Screenshot (thru docker)": {
       "cmd": "docker",
-      "args": ["run", "--rm", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblerunner", "screenshot", "--phone", "<your phone ip>"]
+      "args": ["run", "--rm", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblesdkrunner", "screenshot", "--phone", "<your phone ip>"]
     },
     "Build (thru server)": {
         "cmd": "bash",
