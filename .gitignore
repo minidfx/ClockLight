@@ -34,5 +34,6 @@
 # Atom build configuration
 .atom-build.json
 
-# Pebble 
-/build
+# Pebble
+build/
+node_modules/
