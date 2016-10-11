@@ -3,7 +3,7 @@
 * @Date:   2016-02-16T19:20:15+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-05-08T21:09:51+02:00
+* @Last modified time: 2016-10-09T16:53:21+02:00
 */
 
 #include <pebble.h>
@@ -19,12 +19,7 @@ static void window_load(Window *window)
     const char *language = i18n_get_system_locale();
     setlocale(LC_ALL, language);
 
-    draw_line();
-    draw_battery_line();
-    draw_time();
-    draw_date();
-    draw_week_day();
-    draw_bluetooth();
+    prepare_layers();
 
     // Register services
     tick_timer_service_subscribe(MINUTE_UNIT, handle_minute);
@@ -34,7 +29,6 @@ static void window_load(Window *window)
         .pebble_app_connection_handler = handle_app_connection_handler
     });
 
-    // Get a tm structure
     time_t temp = time(NULL);
     struct tm *tick_time = localtime(&temp);
 
@@ -64,8 +58,7 @@ static void init()
 
     load_resources();
 
-    const bool animated = true;
-    window_stack_push(window, animated);
+    window_stack_push(window, true);
 }
 
 static void deinit()
