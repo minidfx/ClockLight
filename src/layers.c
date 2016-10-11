@@ -3,7 +3,7 @@
 * @Date:   2016-02-16T19:19:55+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-10-11T20:48:39+02:00
+* @Last modified time: 2016-10-11T21:54:22+02:00
 */
 
 #include <pebble.h>
@@ -209,7 +209,7 @@ static void prepare_empty_battery_layer()
 {
   APP_LOG(APP_LOG_LEVEL_DEBUG, "Preparing empty battery icon layer ...");
 
-  int width = 18;
+  int width = 24;
   int height = 15;
   int x = window_bounds.size.w - width;
   int y = window_bounds.size.h - height;
