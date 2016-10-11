@@ -3,7 +3,7 @@
 * @Date:   2016-02-16T19:19:55+01:00
 * @Email:  benjamin.burgy@gmail.com
 * @Last modified by:   minidfx
-* @Last modified time: 2016-10-09T17:34:30+02:00
+* @Last modified time: 2016-10-11T20:48:39+02:00
 */
 
 #include <pebble.h>
@@ -174,7 +174,7 @@ static void update_empty_icon(status_t isEmpty)
 {
   APP_LOG(APP_LOG_LEVEL_DEBUG, "Updating the battery icon ...");
 
-  layer_set_hidden(ptr_empty_battery_layer, isEmpty);
+  layer_set_hidden(ptr_empty_battery_layer, !isEmpty);
 
   APP_LOG(APP_LOG_LEVEL_DEBUG, "Done.");
 }
