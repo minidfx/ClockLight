@@ -4,7 +4,7 @@
   "args": ["run", "--rm", "-v", "~/Git/ClockLight:/home/pebble/project", "minidfx/pebblerunner", "build"],
   "sh": true,
   "errorMatch": [
-    "\\.\\.\\/(?<file>[\\/0-9a-zA-Z\\._]+):(?<line>\\d+):(?<col>\\d+): error:"
+    "\\.\\.\\/(?<file>[\\/0-9a-zA-Z\\._]+):(?<line>\\d+):(?<col>\\d+): error:\\s+(?<message>.+)"
   ],
   "env": {
     "PROJECT_PATH": "<project path>",
